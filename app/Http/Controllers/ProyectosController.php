@@ -17,8 +17,9 @@ class ProyectosController extends Controller
 
     public function getIndex()
     {
-        return view('proyectos.index', array('proyectos' => $this->arrayProyectos));
-        
+        return view('proyectos.index')
+                ->with('proyectos', $this->arrayProyectos);
+
     }
 
     private $arrayProyectos = [
