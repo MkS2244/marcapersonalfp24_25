@@ -22,7 +22,7 @@ class ProyectosController extends Controller
     public function getIndex()
     {
         return view('proyectos.index')
-                ->with('proyecto', $this->arrayProyectos);
+                ->with('proyectos', $this->arrayProyectos);
 
     }
 
