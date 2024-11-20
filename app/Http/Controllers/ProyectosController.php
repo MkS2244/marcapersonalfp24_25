@@ -15,11 +15,21 @@ class ProyectosController extends Controller
             ->with('id', $id);
     }
 
+    public function getCreate(){
+        return view('proyectos.create');
+    }
+
     public function getIndex()
     {
         return view('proyectos.index')
-                ->with('proyectos', $this->arrayProyectos);
+                ->with('proyecto', $this->arrayProyectos);
 
+    }
+
+    public function getEdit($id){
+        return view('proyectos.edit')
+            -> with('proyecto', $this->arrayProyectos[$id])
+            -> with('id',$id);
     }
 
     private $arrayProyectos = [
