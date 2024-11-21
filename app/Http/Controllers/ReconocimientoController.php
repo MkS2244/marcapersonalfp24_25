@@ -8,23 +8,23 @@ class ReconocimientoController extends Controller
 {
 
     public function getIndex(){
-        return view('reconocimientos.index')
-            ->with('reconocimientos', $this->arrayReconocimientos);
+        return view('actividades.index')
+            ->with('actividades', $this->arrayReconocimientos);
     }
 
     public function getShow($id){
-        return view ('reconocimientos.show')
-            ->with('reconocimiento', $this->arrayReconocimientos[$id])
+        return view ('actividades.show')
+            ->with('actividad', $this->arrayReconocimientos[$id])
             ->with('id',$id);
     }
 
     public function getCreate(){
-        return view('reconocimientos.create');
+        return view('actividades.create');
     }
 
     public function getEdit($id){
-        return view('reconocimientos.edit')
-            ->with('reconocimiento', $this->arrayReconocimientos[$id])
+        return view('actividades.edit')
+            ->with('actividad', $this->arrayReconocimientos[$id])
             ->with('id', $id);
     }
 

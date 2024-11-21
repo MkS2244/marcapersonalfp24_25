@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReconocimientoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'getHome']);
@@ -13,14 +12,6 @@ Route::get('login', function () {
 Route::get('logout', function () {
     return 'Logout usuario';
 });
-
-Route::get('reconocimientos', [ReconocimientoController::class, 'getIndex']);
-
-Route::get('reconocimientos/show/{id}', [ReconocimientoController::class, 'getShow'], ['id' => $id]);
-
-Route::get('reconocimientos/create', [ReconocimientoController::class, 'getCreate']);
-
-Route::get('reconocimientos/edit/{id}', [ReconocimientoController::class, 'getEdit'], ['id' => $id]);
 
 Route::get('perfil/{id?}', function ($id = null) {
     return $id ? 'Visualizar el currículo de ' . $id : 'Visualizar el currículo propio';
