@@ -26,8 +26,51 @@ Route::get('pruebaDB/{id}', function ($id = null) {
     // }
     // $estudiante = Estudiante::findOrFail($id);
     // echo $estudiante->nombre . ' - '. $estudiante->ciclo . '<br>';
-    $estudiante = Estudiante::where('ciclo', 'C_'.$id)->firstOrFail();
-    echo $estudiante->nombre;
+    // $estudiante = Estudiante::where('ciclo', 'C_'.$id)->firstOrFail();
+    // echo $estudiante->nombre;
+    // $estudiante = Estudiante::where('ciclo', 'C_'.$id)->get();
+    // foreach($estudiante as $est){
+    //     echo $est->nombre . '<br />';
+    // }
+    // $estudiantes = Estudiante::where('ciclo', 'like', 'C_1%')->get();
+    // foreach ($estudiantes as $est) {
+    //     echo $est->nombre .'<br />';
+    // }
+    $count = Estudiante::where('votos', '>', 100)->count();
+    $maxVotos = Estudiante::max('votos');
+    $minVotos = Estudiante::min('votos');
+    $mediaVotos = Estudiante::avg('votos');
+    $total = Estudiante::sum('votos');
+
+    $salida = '<ul>';
+    $salida .= '<li>Estudiantes con más de 100 votos: ' . $count . '</li>';
+    $salida .= '<li>Mayor número de votos: ' . $maxVotos . '</li>';
+    $salida .= '<li>Menor número de votos: ' . $minVotos . '</li>';
+    $salida .= '<li>Media de los votos: ' . $mediaVotos . '</li>';
+    $salida .= '<li>Total de votos: ' . $total . '</li>';
+
+    $estudiante = Estudiante::where('votos', '>', 100)->take(10)->get();
+    foreach ($estudiante as $est) {
+        $salida .= '<li>' . $est->nombre . ' - ' . $est->votos . '</li>';
+    }
+    $count = Estudiante::where('votos', '>', 100)->count();
+    echo 'Antes: ' . $count . '<br />';
+
+    //$estudiante = new Estudiante;
+    // $id = $votos ? $votos : 1;
+    $estudiante = Estudiante::findOrFail($id);
+    $estudiante->nombre = 'Juan';
+    $estudiante->apellidos = 'Martínez';
+    $estudiante->direccion = 'Dirección de Juan';
+    $estudiante->votos = 130;
+    $estudiante->confirmado = true;
+    $estudiante->ciclo = 'DAW';
+    $estudiante->save();
+
+    $count = Estudiante::where('votos', '>', 100)->count();
+    echo 'Después: ' . $count . '<br />';
+
+    return $salida . '</ul>';
 });
 
 

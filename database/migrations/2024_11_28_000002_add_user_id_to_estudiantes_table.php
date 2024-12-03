@@ -15,8 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')
                 ->nullable()->after('ciclo');
             $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
         });
     }
