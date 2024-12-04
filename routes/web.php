@@ -36,6 +36,44 @@ Route::get('pruebaDB/{id}', function ($id = null) {
     // foreach ($estudiantes as $est) {
     //     echo $est->nombre .'<br />';
     // }
+
+    $salida = getEstadisticas();
+
+// PARA BORRAR
+    $estudiantes = Estudiante::where('nombre', 'Juan ')
+            ->where('apellidos', 'Martínez')
+            ->delete();
+    $salida .= getEstadisticas();
+
+    return 'Estudiantes borrados: '. $estudiantes;
+
+
+// PARA GUARDAR NUEVOS ESTUDIANTES
+    // $estudiante = Estudiante::where('votos', '>', 100)->take(10)->get();
+    // foreach ($estudiante as $est) {
+    //     $salida .= '<li>' . $est->nombre . ' - ' . $est->votos . '</li>';
+    // }
+    // $count = Estudiante::where('votos', '>', 100)->count();
+    // echo 'Antes: ' . $count . '<br />';
+
+    // $estudiante = new Estudiante;
+    //  $id = $votos ? $votos : 1;
+    // $estudiante = Estudiante::findOrFail($id);
+    // $estudiante->nombre = 'Juan';
+    // $estudiante->apellidos = 'Martínez';
+    // $estudiante->direccion = 'Dirección de Juan';
+    // $estudiante->votos = 130;
+    // $estudiante->confirmado = true;
+    // $estudiante->ciclo = 'DAW';
+    // $estudiante->save();
+
+    // $count = Estudiante::where('votos', '>', 100)->count();
+    // echo 'Después: ' . $count . '<br />';
+
+    // return $salida . '</ul>';
+});
+
+function getEstadisticas (){
     $count = Estudiante::where('votos', '>', 100)->count();
     $maxVotos = Estudiante::max('votos');
     $minVotos = Estudiante::min('votos');
@@ -49,31 +87,8 @@ Route::get('pruebaDB/{id}', function ($id = null) {
     $salida .= '<li>Media de los votos: ' . $mediaVotos . '</li>';
     $salida .= '<li>Total de votos: ' . $total . '</li>';
 
-    $estudiante = Estudiante::where('votos', '>', 100)->take(10)->get();
-    foreach ($estudiante as $est) {
-        $salida .= '<li>' . $est->nombre . ' - ' . $est->votos . '</li>';
-    }
-    $count = Estudiante::where('votos', '>', 100)->count();
-    echo 'Antes: ' . $count . '<br />';
-
-    //$estudiante = new Estudiante;
-    // $id = $votos ? $votos : 1;
-    $estudiante = Estudiante::findOrFail($id);
-    $estudiante->nombre = 'Juan';
-    $estudiante->apellidos = 'Martínez';
-    $estudiante->direccion = 'Dirección de Juan';
-    $estudiante->votos = 130;
-    $estudiante->confirmado = true;
-    $estudiante->ciclo = 'DAW';
-    $estudiante->save();
-
-    $count = Estudiante::where('votos', '>', 100)->count();
-    echo 'Después: ' . $count . '<br />';
-
     return $salida . '</ul>';
-});
-
-
+}
 
 include __DIR__ . '/actividades.php';
 include __DIR__ . '/curriculos.php';
