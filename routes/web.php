@@ -27,3 +27,5 @@ include __DIR__.'/curriculos.php';
 include __DIR__.'/proyectos.php';
 include __DIR__.'/reconocimientos.php';
 include __DIR__.'/users.php';
+include __DIR__.'/estudiantes.php';
+include __DIR__.'/docentes.php';

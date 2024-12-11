@@ -25,8 +25,11 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        $this->call(DocentesTableSeeder::class);
+        $this->call(EstudiantesTableSeeder::class);
         self::seedProyectos();
         $this->command->info('Tabla proyectos inicializada con datos!');
+
     }
     private static function seedProyectos()
     {
