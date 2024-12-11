@@ -19,7 +19,7 @@
 
 	            <div class="form-group">
 	               <label for="nombre">Nombre</label>
-	               <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $proyecto->nombre }}">
+	               <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $proyecto['nombre'] }}">
 	            </div>
 
 	            <div class="form-group">
