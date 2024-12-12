@@ -16,22 +16,22 @@
 
 	            <div class="form-group">
 	               <label for="nombre">Nombre</label>
-	               <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $estudiante['nombre'] }}">
+	               <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $estudiante->nombre }}">
 	            </div>
 
 	            <div class="form-group">
 	               <label for="apellidos">Apellido</label>
-	               <input type="text" name="apellidos" id="apellidos"  value="{{ $estudiante['apellidos'] }}">
+	               <input type="text" name="apellidos" id="apellidos"  value="{{ $estudiante->apellidos }}">
 	            </div>
 
 	            <div class="form-group">
                     <label for="direccion">Direccion</label>
-                    <input type="text" name="direccion" id="direccion"  value="{{ $estudiante['direccion'] }}">
+                    <input type="text" name="direccion" id="direccion"  value="{{ $estudiante->direccion }}">
                  </div>
 
                  <div class="form-group">
                     <label for="ciclo">Ciclo</label>
-                    <input type="text" name="ciclo" id="ciclo"  value="{{ $estudiante['ciclo'] }}">
+                    <input type="text" name="ciclo" id="ciclo"  value="{{ $estudiante->ciclo }}">
                  </div>
 
 	            <div class="form-group text-center">

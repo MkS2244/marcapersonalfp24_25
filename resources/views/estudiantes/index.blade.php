@@ -10,11 +10,11 @@
         <section class="box">
             <a href="#" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
             <header>
-                <h3>{{ $estudiante['nombre']}}</h3>
+                <h3>{{ $estudiante->nombre}}</h3>
             </header>
             <footer>
                 <ul class="actions">
-                    <li><a href="{{ action([App\Http\Controllers\EstudiantesController::class, 'getShow'], ['id' => $estudiante['id']] ) }}" class="button alt">Más info</a></li>
+                    <li><a href="{{ action([App\Http\Controllers\EstudiantesController::class, 'getShow'], ['id' => $estudiante->id] ) }}" class="button alt">Más info</a></li>
                 </ul>
             </footer>
         </section>
