@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\ReactAdminResponse;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public $modelclass = User::class;
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        return UserResource::collection(
-            User::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
-        );
+        return UserResource::collection(User::all());
     }
 
     /**
@@ -61,7 +61,8 @@ class UserController extends Controller
             return response()->json(null, 204);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Error: ' . $e->getMessage()], 400);
+                'message' => 'Error: ' . $e->getMessage()
+            ], 400);
         }
     }
 }
