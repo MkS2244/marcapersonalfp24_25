@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Empresa;
 use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ReconocimientosTableSeeder::class);
         $this->command->info('Tabla reconocimientos inicializada con datos!');
         $this->call(UsersTableSeeder::class);
+        $this->call(EmpresasTableSeeder::class);
+        $this->command->info('Tabla empresas inicializada con datos!');
         Model::reguard();
         Schema::enableForeignKeyConstraints();
 
