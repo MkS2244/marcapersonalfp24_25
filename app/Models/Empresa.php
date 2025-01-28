@@ -19,4 +19,6 @@ class Empresa extends Model
         'token',
         'user_id'
     ];
+
+    public static $filterColumns = ['nif', 'nombre', 'email', 'token'];
 }

@@ -16,14 +16,6 @@ class EmpresasTableSeeder extends Seeder
     {
         Empresa::truncate();
 
-        if(Empresa::count() == 0) {
-            if(config('app.env') ==='local'){
-                Empresa::factory(10)->create();
-                Empresa::factory()->create([
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-                ]);
-            }
-        }
+        Empresa::factory(10)->create();
     }
 }

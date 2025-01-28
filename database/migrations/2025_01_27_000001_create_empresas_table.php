@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nombre', 100)->nullable();
             $table->string('email', 100)->nullable();
             $table->string('token',100)->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
