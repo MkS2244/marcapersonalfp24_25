@@ -15,8 +15,6 @@ class ProyectoController extends Controller
      * Display a listing of the resource.
      */
 
-     public $modelclass = Proyecto::class;
-
 
     public function index(Request $request)
     {
@@ -73,5 +71,10 @@ class ProyectoController extends Controller
                 'message' => 'Error: ' . $e->getMessage()
             ], 400);
         }
+    }
+
+    public function count()
+    {
+        return response()->json("count: ", Proyecto::count());
     }
 }
