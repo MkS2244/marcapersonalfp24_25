@@ -75,6 +75,6 @@ class ProyectoController extends Controller
 
     public function count()
     {
-        return response()->json("count: ", Proyecto::count());
+        return response()->json(["count: " => Proyecto::count()]);
     }
 }
