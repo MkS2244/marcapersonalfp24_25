@@ -18,6 +18,13 @@ class Curriculo extends Model
         'texto_curriculum'
     ];
 
+    public static $filterColumns = [
+        'id',
+        'user_id',
+        'video_curriculum',
+        'texto_curriculum'
+    ];
+
     /**
      * Get the user that owns the curriculo.
      */
