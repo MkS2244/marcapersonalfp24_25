@@ -59,7 +59,7 @@ class User extends Authenticatable
     /**
      * Get the curriculo associated with the user.
      */
-    public function curriculo(): HasOne
+    public function curriculo()
     {
         return $this->hasOne(Curriculo::class);
     }
