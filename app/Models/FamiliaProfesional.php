@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FamiliaProfesional extends Model
 {
@@ -14,4 +15,12 @@ class FamiliaProfesional extends Model
         'nombre',
         'imagen'
     ];
+
+    /**
+     * Get the ciclos for the familia_profesional.
+     */
+    public function ciclos(): HasMany
+    {
+        return $this->hasMany(Ciclo::class);
+    }
 }
