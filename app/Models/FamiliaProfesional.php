@@ -16,6 +16,8 @@ class FamiliaProfesional extends Model
         'imagen'
     ];
 
+    public static $filterColumns = ['codigo', 'nombre'];
+
     /**
      * Get the ciclos for the familia_profesional.
      */
