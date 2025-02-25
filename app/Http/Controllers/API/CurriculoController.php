@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CurriculoResource;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,23 @@ class CurriculoController extends Controller
     public $modelclass = Curriculo::class;
 
     /**
+     * Get the middleware that should be assigned to the controller.
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         return CurriculoResource::collection(
             Curriculo::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
+                ->paginate($request->perPage)
         );
     }
 
@@ -29,6 +40,9 @@ class CurriculoController extends Controller
     {
 
         $curriculo = json_decode($request->getContent(), true);
+        if(!$request->user()->esAdmin()){
+            $curriculo['user_id'] = $request->user()->id;
+        }
         $curriculo = Curriculo::create($curriculo);
 
         return new CurriculoResource($curriculo);
@@ -47,7 +61,7 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
-        abort_if ($request->user()->cannot('update', $curriculo), 403);
+        abort_if($request->user()->cannot('update', $curriculo), 403);
 
         $curriculoData = json_decode($request->getContent(), true);
         $curriculo->update($curriculoData);
