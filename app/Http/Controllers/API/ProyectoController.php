@@ -7,10 +7,24 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class ProyectoController extends Controller
+class ProyectoController extends Controller implements HasMiddleware
 {
     public $modelclass = Proyecto::class;
+
+    /**
+     * Get the middleware that should be assigned to the controller.
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +36,7 @@ class ProyectoController extends Controller
          */
         return ProyectoResource::collection(
             Proyecto::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
+                ->paginate($request->perPage)
         );
     }
 
@@ -31,8 +45,11 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Proyecto::class);
         $proyecto = json_decode($request->getContent(), true);
-
+        if (!$request->user()->esAdmin()) {
+            $proyecto['user_id'] = $request->user()->id;
+        }
         $proyecto = Proyecto::create($proyecto);
 
         return new ProyectoResource($proyecto);
@@ -43,7 +60,7 @@ class ProyectoController extends Controller
      */
     public function show(Proyecto $proyecto)
     {
-            return new ProyectoResource($proyecto);
+        return new ProyectoResource($proyecto);
     }
 
     /**
@@ -51,6 +68,7 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
+        Gate::authorize('update', Proyecto::class);
         $proyectoData = json_decode($request->getContent(), true);
         $proyecto->update($proyectoData);
 
@@ -62,6 +80,7 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
+        Gate::authorize('delete', Proyecto::class);
         try {
             $proyecto->delete();
             return response()->json(null, 204);
